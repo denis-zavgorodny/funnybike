@@ -1,6 +1,6 @@
 {
   "name": "funnybike",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "funny bike boilerplate html",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,8 @@
     "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-include-replace": "^4.0.1"
+    "grunt-include-replace": "^4.0.1",
+    "grunt-list-page": "^0.1.1",
+    "grunt-w3c-html-validation": "^0.1.8"
   }
 }

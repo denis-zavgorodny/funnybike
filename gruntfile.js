@@ -4,6 +4,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-include-replace');
     grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-list-page');
+    grunt.loadNpmTasks('grunt-w3c-html-validation');  
+
+
     grunt.initConfig({
         connect: {
             server: {
@@ -78,12 +82,31 @@ module.exports = function(grunt) {
                     files: "./html/**"
                 }
             }
-        }
+        },
+        list_page: {
+          default_options: {
+            options: {
+            },
+            files: {
+              'html/root.html': ['html/*.html']
+            }
+          }
+        },
+        'validation': { // Grunt w3c validation plugin
+            options: {
+                reset: grunt.option('reset') || false,
+                stoponerror: true,
+                remotePath: '',
+                doctype: 'HTML5',
+                failHard: true,
+                relaxerror: ["Bad value X-UA-Compatible for attribute http-equiv on element meta.","Element title must not be empty."]
+            },
+            files: {
+                src: ['./html/*.html']
+            }
+        },
     });
-    grunt.registerTask('default', ['watch']);
-    grunt.registerTask('rebuild', ['includereplace:dev']);
-    grunt.registerTask('compile', ['includereplace:compile']);
-    grunt.registerTask('dev', ['connect', 'browserSync', 'watch']);
-
+    grunt.registerTask('default', ['connect', 'browserSync', 'watch']);
+    grunt.registerTask('build', ['includereplace:compile', 'list_page', 'validation']);
 };
 
