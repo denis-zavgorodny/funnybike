@@ -1,0 +1,31 @@
+{
+  "name": "funnybike",
+  "version": "1.0.0",
+  "description": "funny bike boilerplate html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denis-zavgorodny/funnybike"
+  },
+  "keywords": [
+    "html",
+    "bild",
+    "template"
+  ],
+  "author": "Denis Zavgorodny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denis-zavgorodny/funnybike/issues"
+  },
+  "homepage": "https://github.com/denis-zavgorodny/funnybike",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-include-replace": "^4.0.1"
+  }
+}
