@@ -32,6 +32,7 @@
   },
   "files": [
     "html",
-    "tpl"
+    "tpl",
+    "gruntfile.js"
   ]
 }
