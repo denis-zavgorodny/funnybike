@@ -1,6 +1,7 @@
 #Boilerplate
 
 ##Features
++ simple http server
 + live reload
 + include html and css parts
 + w3c validation
