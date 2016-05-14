@@ -1,6 +1,6 @@
 {
   "name": "funnybike",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "funny bike boilerplate html",
   "main": "index.js",
   "scripts": {
