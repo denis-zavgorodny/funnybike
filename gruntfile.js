@@ -1,3 +1,4 @@
+/*jslint node: true */
 module.exports = function(grunt) {
     'use strict';
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -6,7 +7,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-list-page');
     grunt.loadNpmTasks('grunt-w3c-html-validation');  
-
+    grunt.loadNpmTasks('grunt-ftp-deploy');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.initConfig({
         connect: {
@@ -83,6 +86,15 @@ module.exports = function(grunt) {
                 }
             }
         },
+        csslint: {
+          lax: {
+            options: {
+                csslintrc: '.csslintrc',
+                'linting-option': false
+            },
+            src: ["html/css/*.css"]
+          }
+        },
         list_page: {
           default_options: {
             options: {
@@ -95,18 +107,61 @@ module.exports = function(grunt) {
         'validation': { // Grunt w3c validation plugin
             options: {
                 reset: grunt.option('reset') || false,
-                stoponerror: true,
+                stoponerror: false,
                 remotePath: '',
                 doctype: 'HTML5',
                 failHard: true,
+                generateReport: false,
                 relaxerror: ["Bad value X-UA-Compatible for attribute http-equiv on element meta.","Element title must not be empty."]
             },
             files: {
                 src: ['./html/*.html']
             }
         },
+        'ftp-deploy': {
+          build: {
+            auth: {
+              host: '127.0.0.1',
+              port: 21,
+              authKey: 'key1'
+            },
+            src: './html/',
+            dest: '/gum/',
+            exclusions: [
+                './.ftppass', 
+                './.git', 
+                './.idea', 
+                './node_modules',
+                './gruntfile.js',
+                './w3cErrors',
+                './tpl',
+                '.gitignore',
+                'package.json',
+                'validation-status.json'
+            ]
+          }
+        },
+        jshint: {
+            all: {
+                src: ['gruntfile.js', 'html/js/*.js'],
+                options: {
+                    "curly": true,
+                    "eqnull": true,
+                    "eqeqeq": true,
+                    "undef": true,
+                    "devel": false,
+                    "browser": true,
+                    "asi": false,
+                    "globals": {
+                        "jQuery": false,
+                        "$": false
+                    }
+                }
+            }
+        }
     });
     grunt.registerTask('default', ['connect', 'browserSync', 'watch']);
-    grunt.registerTask('build', ['includereplace:compile', 'list_page', 'validation']);
+    grunt.registerTask('build', ['jshint', 'csslint:lax', 'includereplace:compile', 'validation', 'list_page','ftp-deploy']);
+    grunt.registerTask('lint', ['csslint:lax', 'jshint', 'validation']);
 };
 

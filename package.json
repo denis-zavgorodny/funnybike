@@ -26,7 +26,10 @@
     "grunt": "^1.0.1",
     "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-csslint": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-ftp-deploy": "^0.1.10",
     "grunt-include-replace": "^4.0.1",
     "grunt-list-page": "^0.1.1",
     "grunt-w3c-html-validation": "^0.1.8"
@@ -35,5 +38,8 @@
     "html",
     "tpl",
     "gruntfile.js"
-  ]
+  ],
+  "devDependencies": {
+    "grunt": "^1.0.1"
+  }
 }
